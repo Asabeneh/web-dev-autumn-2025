@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        header nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header ul {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            list-style: none;
+            gap: 0.5rem;
+        }
+
+        header ul li a {
+            display: block;
+            padding: 1.5rem 1.5rem;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        header ul li a:hover {
+            color: var(--primary);
+        }
+
+        header ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 1rem;
+            left: 1.5rem;
+            right: 1.5rem;
+            height: 2px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        header ul li a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 6rem;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 100px;
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin: 2rem 0 1rem;
+        }
+
+        p {
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        /* Technology Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light-gray);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .tech-item span {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        /* List Styles */
+        ul, ol {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            color: var(--gray);
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        /* Video/Media Styles */
+        video, iframe {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            margin: 2rem 0;
+            aspect-ratio: 16/9;
+        }
+
+        audio {
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        /* Form Styles */
+        form {
+            max-width: 600px;
+            margin: 2rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button, .button {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        button:hover, .button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Link Styles */
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 6rem;
+        }
+
+        footer p {
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+
+        footer a {
+            color: var(--white);
+            margin: 0 1rem;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        .footer-links {
+            margin: 1.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header ul {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0;
+            }
+
+            header ul li a {
+                padding: 1rem 0.875rem;
+                font-size: 14px;
+            }
+
+            main {
+                padding: 5rem 1.5rem 2rem;
+            }
+
+            .hero {
+                padding: 2rem 0 3rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="top">
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#frontend">Frontend</a></li>
+                <li><a href="#backend">Backend</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contacts">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero" id="home">
+            <h1>Web Development Mastery</h1>
+            <p class="hero-subtitle">Your comprehensive guide to modern web development, from frontend fundamentals to backend architecture</p>
+        </div>
+
+        <section id="frontend">
+            <h2>Frontend Development</h2>
+            <p>Frontend development focuses on creating the visual and interactive elements of websites that users directly engage with. It combines design principles with programming to build responsive, accessible, and performant user interfaces.</p>
+            
+            <p>Modern frontend development has evolved significantly with the introduction of component-based architectures, reactive programming patterns, and sophisticated build tools. Today's frontend developers need to balance aesthetic appeal with performance optimization and accessibility standards.</p>
+
+            <h3>Core Technologies</h3>
+            <div class="tech-grid">
+                <div class="tech-item"><span>HTML5</span></div>
+                <div class="tech-item"><span>CSS3</span></div>
+                <div class="tech-item"><span>JavaScript</span></div>
+                <div class="tech-item"><span>React</span></div>
+                <div class="tech-item"><span>Vue.js</span></div>
+                <div class="tech-item"><span>Angular</span></div>
+                <div class="tech-item"><span>TypeScript</span></div>
+                <div class="tech-item"><span>Tailwind CSS</span></div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3>HTML & Semantics</h3>
+                    <p>HTML5 provides the structural foundation for web content. Modern HTML emphasizes semantic markup, accessibility features, and integration with APIs for media, storage, and more.</p>
+                </div>
+                <div class="card">
+                    <h3>CSS & Styling</h3>
+                    <p>CSS has evolved to include powerful layout systems like Flexbox and Grid, custom properties, animations, and responsive design patterns that adapt to any screen size.</p>
+                </div>
+                <div class="card">
+                    <h3>JavaScript Frameworks</h3>
+                    <p>Modern frameworks like React, Vue, and Angular enable building complex, interactive applications with reusable components and efficient state management.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="backend">
+            <h2>Backend Development</h2>
+            <p>Backend development powers the server-side logic, database interactions, and APIs that make web applications functional. It handles data processing, authentication, business logic, and communication between the frontend and databases.</p>
+
+            <p>A robust backend ensures security, scalability, and performance. Backend developers work with various programming languages and frameworks to build RESTful APIs, manage databases, implement caching strategies, and handle server infrastructure.</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Node.js & Express</h3>
+                    <p>Node.js enables JavaScript on the server side, while Express provides a minimal framework for building web applications and APIs with middleware support.</p>
+                </div>
+                <div class="card">
+                    <h3>Python & Django</h3>
+                    <p>Python's Django framework offers a batteries-included approach with ORM, authentication, admin panel, and security features built in for rapid development.</p>
+                </div>
+                <div class="card">
+                    <h3>Ruby on Rails</h3>
+                    <p>Rails emphasizes convention over configuration, providing a full-stack framework that includes everything needed to create database-backed web applications.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Databases</h2>
+            <p>Databases are the backbone of data storage and retrieval in web applications. Choosing the right database depends on your data structure, scalability needs, and query patterns.</p>
+
+            <p>Modern applications often use a combination of SQL and NoSQL databases. SQL databases like PostgreSQL and MySQL excel at structured data with complex relationships, while NoSQL databases like MongoDB and Redis offer flexibility and performance for specific use cases.</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3>SQL Databases</h3>
+                    <p>Relational databases use structured schemas with tables and relationships. They ensure data integrity through ACID properties and support complex queries with SQL.</p>
+                    <ul>
+                        <li>PostgreSQL</li>
+                        <li>MySQL</li>
+                        <li>SQLite</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>NoSQL Databases</h3>
+                    <p>Document, key-value, and graph databases offer flexible schemas and horizontal scalability, ideal for unstructured data and high-performance requirements.</p>
+                    <ul>
+                        <li>MongoDB</li>
+                        <li>Redis</li>
+                        <li>Cassandra</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>APIs & Integration</h2>
+            <p>Application Programming Interfaces (APIs) enable different software systems to communicate. RESTful APIs have become the standard for web services, using HTTP methods and JSON for data exchange.</p>
+
+            <p>Modern API development includes authentication strategies (OAuth, JWT), rate limiting, versioning, and comprehensive documentation. GraphQL has emerged as an alternative, offering clients precise control over data fetching.</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3>REST APIs</h3>
+                    <p>Representational State Transfer uses standard HTTP methods (GET, POST, PUT, DELETE) to perform operations on resources identified by URLs.</p>
+                </div>
+                <div class="card">
+                    <h3>GraphQL</h3>
+                    <p>A query language for APIs that allows clients to request exactly the data they need, reducing over-fetching and improving performance.</p>
+                </div>
+                <div class="card">
+                    <h3>WebSockets</h3>
+                    <p>Enable real-time, bidirectional communication between clients and servers, perfect for chat applications, live updates, and collaborative tools.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>UI/UX Design</h2>
+            <p>User Interface (UI) and User Experience (UX) design focus on creating intuitive, accessible, and visually appealing digital products. Good design balances aesthetics with functionality.</p>
+
+            <p>UX design involves user research, wireframing, prototyping, and usability testing. UI design focuses on visual hierarchy, typography, color theory, and interactive elements. Together, they create seamless user experiences that drive engagement and satisfaction.</p>
+
+            <h3>Key Principles</h3>
+            <ul>
+                <li><strong>User-Centered Design:</strong> Prioritize user needs and behaviors throughout the design process</li>
+                <li><strong>Consistency:</strong> Maintain uniform design patterns and interactions across the application</li>
+                <li><strong>Accessibility:</strong> Ensure your design works for users of all abilities with proper contrast, keyboard navigation, and screen reader support</li>
+                <li><strong>Visual Hierarchy:</strong> Guide users' attention through size, color, and positioning</li>
+                <li><strong>Responsive Design:</strong> Adapt layouts seamlessly across devices and screen sizes</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Essential Skills for 2025</h2>
+            <p>The web development landscape continues to evolve rapidly. Here are the most important skills to master for staying competitive in the field:</p>
+
+            <ol>
+                <li><strong>Git & GitHub:</strong> Version control is essential for collaboration, tracking changes, and managing code across teams</li>
+                <li><strong>Responsive Design:</strong> Mobile-first approach and understanding of CSS frameworks and modern layout techniques</li>
+                <li><strong>API Development:</strong> Building and consuming RESTful and GraphQL APIs with proper authentication</li>
+                <li><strong>Cloud Services:</strong> Familiarity with AWS, Azure, or Google Cloud for deployment and scaling</li>
+                <li><strong>DevOps Basics:</strong> Understanding CI/CD pipelines, Docker, and container orchestration</li>
+                <li><strong>Security Best Practices:</strong> Implementing authentication, authorization, and protecting against common vulnerabilities</li>
+                <li><strong>Performance Optimization:</strong> Code splitting, lazy loading, caching strategies, and monitoring tools</li>
+                <li><strong>AI & Prompt Engineering:</strong> Leveraging AI tools effectively for code generation and problem-solving</li>
+            </ol>
+        </section>
+
+        <section id="about">
+            <h2>About This Guide</h2>
+            <p>This comprehensive web development guide is designed for developers at all levels, from beginners taking their first steps in coding to experienced professionals looking to expand their knowledge.</p>
+            
+            <p>Web development is a constantly evolving field that combines creativity, logic, and problem-solving. Whether you're building a personal blog, an e-commerce platform, or a complex web application, understanding the fundamentals and staying current with modern practices is essential.</p>
+
+            <p>Our approach emphasizes hands-on learning, best practices, and real-world applications. We believe that the best way to learn web development is by building projects, experimenting with new technologies, and continuously adapting to the changing landscape of the web.</p>
+        </section>
+
+        <section id="contacts">
+            <h2>Get In Touch</h2>
+            <p>Have questions about web development? Want to collaborate on a project? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.</p>
+
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="john.doe@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" name="country">
+                        <option value="Finland">Finland</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Denmark">Denmark</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us about your project or question..." required></textarea>
+                </div>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Web Development Guide. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="https://github.com" target="_blank">GitHub</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+        </div>
+        <a href="#top">↑ Back to Top</a>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We\'ll get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

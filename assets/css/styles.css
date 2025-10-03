@@ -1,0 +1,115 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lato";
+}
+header {
+    width: 100%;
+    z-index: 100;
+    border-bottom: 3px solid gray;
+
+}
+header ul{
+width: 50%;
+margin: 0 auto;
+}
+
+header ul li {
+    display: inline-block;
+    margin: 20px;
+}
+
+header ul li a {
+    font-size: 22px;
+    color: black;
+    text-decoration: none;
+}
+
+main {
+    font-size: 18px;
+    line-height: 160%;
+    width: 60%;
+    padding-top: 80px;
+    margin: 0 auto;
+
+}
+
+h1 {
+    color: purple;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 30px;
+    font-size: 48px;
+    font-weight: bolder;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    background-color: rgb(219, 219, 219);
+    border-radius: 50px;
+    text-align: center;
+    font-family: "Roboto";
+}
+
+h2 {
+    text-transform: uppercase;
+    color: purple;
+    font-weight: 900;
+    font-family: "Roboto";
+    padding: 10px 0;
+}
+
+section {
+
+    margin: 50px 0px;
+    padding: 30px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background: rgb(255, 254, 254);
+}
+section:hover {
+    transform: scale(1.01);
+    background-color: #efebeb;
+    transition: 0.5s ease-in;
+}
+
+video,
+iframe {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+footer {
+    text-align: center;
+}
+#social-icons {
+    margin: 30px auto;
+}
+i {
+    font-size: 45px;
+     margin-left: 30px;
+   
+}
+
+.fa-linkedin {
+ color:  #0A66C2;
+}
+
+.fa-github-square{
+      color: #333;
+
+}
+
+.fa-twitter-square{
+   color:  #1DA1F2; 
+}
+.fa-arrow-alt-circle-up {
+    color: orange;
+}
+#arrow-wrapper {
+    width: 100px;
+    text-align: center;
+    float:right;
+
+}
