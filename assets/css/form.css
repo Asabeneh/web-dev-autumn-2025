@@ -1,0 +1,30 @@
+
+.form-group {
+    margin: 10px 0;
+}
+
+label {
+    display: block;
+}
+
+input,
+select,
+textarea {
+    padding: 12px;
+    width: 80%;
+    outline: 1px solid rgb(241, 213, 241);
+    border: 1px solid rgb(241, 213, 241);
+    border-radius: 8px;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border: 2px solid purple;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border: 2px solid rgb(244, 6, 244);
+}
