@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn JavaScript</title>
+   
+    <style>
+         #boxes {
+        display:flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+        #boxes div {
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            font-size: 48px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="title">Learn JavaScript</h1>
+    <ul id="countries-wrapper"></ul>
+    <div id="boxes"></div>
+    <button id="hexaColorBtn">Create Hexa Colors</button>
+    <script>
+        console.log('Hello World!')
+        let a = 3
+        let b = 4
+        console.log(a + b)
+        console.log(a - b)
+        console.log(a * b)
+        console.log(a / b)
+        console.log(b % a)
+        console.log(a ** b)
+
+        // this is a single line comment
+
+        /*
+        Multiline
+        comment
+        because it goes to 
+        multiple lines
+
+        */
+
+        // Data types
+        /*
+        - Number
+        - Boolean: True or False
+        - String
+        - Object
+        - null
+        - undefined
+
+        */
+function hexaColorGenerator() {
+    let hexaColor = '#'
+    let letter = 'abcdef0123456789'
+    // 0 TO 0.99999999
+
+    for (let i = 0; i < 6; i++){
+    // 0123456789
+    let num = Math.floor(Math.random() * letter.length)
+    hexaColor = hexaColor + letter[num]
+
+    }
+    return hexaColor
+}
+     
+
+        // variables
+
+        let body = document.body
+        let title = document.getElementById('title')
+        let hexaColorBtn = document.getElementById('hexaColorBtn')
+        title.style.color = '#c37cf9'
+        title.style.fontSize = '96px'
+        title.style.fontWeight = 'bold'
+        console.log(title)
+        title.textContent = 'Scandinavian Countries'
+        let countriesWrapper = document.getElementById('countries-wrapper')
+
+        let countries = [{
+            country:'Finland',
+            flag:'blue'
+        }, {
+            country:'Sweden',
+            flag:'yellow'
+        }, {
+            country:'Norway',
+            flag:'Red'
+        }]
+
+        for (let item of countries) {
+            let li = document.createElement('li')
+            li.textContent = item.country
+            li.style.border = '1px solid gray'
+            li.style.margin = '5px auto'
+            li.style.padding  = '5px'
+            li.style.background = item.flag
+            countriesWrapper.appendChild(li)
+        }
+
+       function createHexaColorBoxes() {
+         let boxes = document.getElementById('boxes')
+        for (let i = 0; i < 101; i++){
+            let div = document.createElement('div')
+            div.textContent = i
+            div.style.backgroundColor = hexaColorGenerator()
+            if (i % 2 == 0) {
+                div.style.backgroundColor = 'green'
+                div.style.color = 'white'
+            }
+            boxes.appendChild(div)
+
+        }
+       }
+
+
+        // setInterval(() => {
+        //     boxes.innerHTML = ''
+        // }, 3000)
+
+        // red = ff000 => rgb
+       console.log(hexaColorBtn)
+       let flag = false
+
+       hexaColorBtn.addEventListener('click', () => {
+        createHexaColorBoxes()
+        // flag = true
+        // if (flag) {
+        //     boxes.innerHTML = ''
+        // }
+
+       })
+
+
+
+
+    </script>
+</body>
+
+</html>
